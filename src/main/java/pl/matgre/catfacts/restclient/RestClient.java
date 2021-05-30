@@ -11,21 +11,22 @@ import pl.matgre.catfacts.mapper.CatFactDtoToCatFactMapper;
 @Component
 public class RestClient {
 
-    public static final String HTTPS_FACTS_RANDOM = "https://cat-fact.herokuapp.com/facts/random";
+    public static final String HTTPS_FACTS_RANDOM = "https://cat-fact.herokuapp.com/facts/random?amount=";
 
     RestTemplate restTemplate = new RestTemplate();
     CatFactDtoToCatFactMapper catFactDtoToCatFactMapper = new CatFactDtoToCatFactMapper();
 
-    public CatFact getApiCatsFact() {
+    public CatFact getApiCatsFact(String amount) {
 
         ResponseEntity<CatFactsDto> exchange = restTemplate.exchange(
-                HTTPS_FACTS_RANDOM,
+                HTTPS_FACTS_RANDOM + "{amount}",
                 HttpMethod.GET,
                 null,
-                CatFactsDto.class
+                CatFactsDto.class,
+                amount
         );
 
-        CatFact catFact = catFactDtoToCatFactMapper.catFactDtoToCatFactMapper(exchange.getBody());
+        CatFact catFact = catFactDtoToCatFactMapper.mapCatFactDtoToCatFact(exchange.getBody());
 
         return catFact;
 

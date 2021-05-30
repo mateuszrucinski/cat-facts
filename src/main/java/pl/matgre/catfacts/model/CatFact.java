@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,5 +15,5 @@ import org.springframework.stereotype.Component;
 @Builder
 public class CatFact {
 
-    public String text;
+    public List<String> text;
 }

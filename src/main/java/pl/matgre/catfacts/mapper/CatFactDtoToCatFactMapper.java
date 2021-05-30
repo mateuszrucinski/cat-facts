@@ -7,7 +7,7 @@ import pl.matgre.catfacts.catfactsDto.CatFactsDto;
 @Component
 public class CatFactDtoToCatFactMapper {
 
-    public CatFact catFactDtoToCatFactMapper(CatFactsDto catFactsDto) {
+    public CatFact mapCatFactDtoToCatFact(CatFactsDto catFactsDto) {
 
         return CatFact.builder()
                 .text(catFactsDto.getText())

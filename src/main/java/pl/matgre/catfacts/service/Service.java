@@ -13,7 +13,7 @@ public class Service {
         this.restClient = restClient;
     }
 
-    public CatFact getCatsFact() {
-        return restClient.getApiCatsFact();
+    public CatFact getCatsFact(String amount) {
+        return restClient.getApiCatsFact(amount);
     }
 }
