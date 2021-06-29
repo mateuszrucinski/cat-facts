@@ -16,7 +16,7 @@ public class Controller {
     }
 
     @GetMapping("/catfacts")
-    public CatFact getCatsFact(@RequestParam String amount) {
+    public CatFact[] getCatsFact(@RequestParam String amount) {
         return service.getCatsFact(amount);
     }
 }

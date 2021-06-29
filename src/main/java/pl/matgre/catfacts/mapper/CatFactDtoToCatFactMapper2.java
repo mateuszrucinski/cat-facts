@@ -4,21 +4,32 @@ import org.springframework.stereotype.Component;
 import pl.matgre.catfacts.catfactsDto.CatFactsDto;
 import pl.matgre.catfacts.model.CatFact;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
-public class CatFactDtoToCatFactMapper {
+public class CatFactDtoToCatFactMapper2 {
 
-    public CatFact[] mapCatFactDtoToCatFact(CatFactsDto[] catFactsDto) {
+    public List<CatFact> mapManyCatFactsDtoToCatFacts(CatFactsDto[] catFactsDto) {
 
-        CatFact[] catFacts = new CatFact[catFactsDto.length];
+        List<CatFact> catFacts = new ArrayList<>();
 
         for(int i = 0; i < catFactsDto.length; i++) {
             CatFactsDto catFactDto = catFactsDto[i];
             CatFact catFact = CatFact.builder()
                     .text(catFactDto.getText())
                     .build();
-            catFacts[i] = catFact;
+            catFacts.add(catFact);
         }
 
         return catFacts;
+    }
+
+    public CatFact mapCatFactDtoToCatFact(CatFactsDto catFactsDto) {
+
+        return CatFact.builder()
+                .text(catFactsDto.getText())
+                .build();
+
     }
 }

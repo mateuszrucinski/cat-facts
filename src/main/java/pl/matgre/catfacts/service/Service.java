@@ -1,10 +1,9 @@
 package pl.matgre.catfacts.service;
 
-import org.springframework.web.bind.annotation.RestController;
 import pl.matgre.catfacts.model.CatFact;
 import pl.matgre.catfacts.restclient.RestClient;
 
-@RestController
+@org.springframework.stereotype.Service
 public class Service {
 
     private final RestClient restClient;
@@ -13,7 +12,7 @@ public class Service {
         this.restClient = restClient;
     }
 
-    public CatFact getCatsFact(String amount) {
+    public CatFact[] getCatsFact(String amount) {
         return restClient.getApiCatsFact(amount);
     }
 }
