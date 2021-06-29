@@ -1,39 +1,48 @@
 package pl.matgre.catfacts.restclient;
 
-import org.springframework.http.*;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import pl.matgre.catfacts.model.CatFact;
 import pl.matgre.catfacts.catfactsDto.CatFactsDto;
 import pl.matgre.catfacts.mapper.CatFactDtoToCatFactMapper;
+import pl.matgre.catfacts.model.CatFact;
 
-import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class RestClient {
 
-    public static final String HTTPS_FACTS_RANDOM = "https://cat-fact.herokuapp.com/facts/random?amount={amount}";
+    public static final String HTTPS_FACTS_RANDOM = "https://cat-fact.herokuapp.com/facts/random";
 
-    RestTemplate restTemplate = new RestTemplate();
-    CatFactDtoToCatFactMapper catFactDtoToCatFactMapper = new CatFactDtoToCatFactMapper();
+    private RestTemplate restTemplate = new RestTemplate();
+    private CatFactDtoToCatFactMapper catFactDtoToCatFactMapper = new CatFactDtoToCatFactMapper();
 
-    public CatFact[] getApiCatsFact(String amount) {
-
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//        HttpEntity <String> entity = new HttpEntity<String>(headers);
+    public List<CatFact> getManyApiCatsFacts(String amount) {
 
         ResponseEntity<CatFactsDto[]> exchange = restTemplate.exchange(
-                HTTPS_FACTS_RANDOM,
+                HTTPS_FACTS_RANDOM + "?amount={amount}",
                 HttpMethod.GET,
                 null,
                 CatFactsDto[].class,
                 amount
         );
 
-        CatFact[] catFact = catFactDtoToCatFactMapper.mapCatFactDtoToCatFact(exchange.getBody());
+        return catFactDtoToCatFactMapper.mapManyCatFactsDtoToCatFacts(exchange.getBody());
 
-        return catFact;
+    }
+
+
+    public CatFact getApiCatsFact() {
+
+        ResponseEntity<CatFactsDto> exchange = restTemplate.exchange(
+                HTTPS_FACTS_RANDOM,
+                HttpMethod.GET,
+                null,
+                CatFactsDto.class
+        );
+
+        return catFactDtoToCatFactMapper.mapCatFactDtoToCatFact(exchange.getBody());
 
     }
 

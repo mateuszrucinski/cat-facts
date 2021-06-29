@@ -4,19 +4,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.matgre.catfacts.model.CatFact;
-import pl.matgre.catfacts.service.Service;
+import pl.matgre.catfacts.service.ServiceCatFact;
+
+import java.util.List;
 
 @RestController
 public class Controller {
 
-    private final Service service;
+    private final ServiceCatFact serviceCatFact;
 
-    public Controller(Service service) {
-        this.service = service;
+    public Controller(ServiceCatFact serviceCatFact) {
+        this.serviceCatFact = serviceCatFact;
     }
 
-    @GetMapping("/catfacts")
-    public CatFact[] getCatsFact(@RequestParam String amount) {
-        return service.getCatsFact(amount);
+    @GetMapping("/catfacts/list")
+    public List<CatFact> getManyCatsFacts(@RequestParam String amount) {
+        return serviceCatFact.getManyCatsFacts(amount);
+    }
+
+    @GetMapping("/catfact")
+    public CatFact getCatsFact() {
+        return serviceCatFact.getCatFact();
     }
 }

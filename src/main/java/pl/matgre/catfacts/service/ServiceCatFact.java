@@ -2,16 +2,16 @@ package pl.matgre.catfacts.service;
 
 import org.springframework.stereotype.Service;
 import pl.matgre.catfacts.model.CatFact;
-import pl.matgre.catfacts.restclient.RestClient2;
+import pl.matgre.catfacts.restclient.RestClient;
 
 import java.util.List;
 
 @Service
-public class Service2 {
+public class ServiceCatFact {
 
-    private final RestClient2 restClient;
+    private final RestClient restClient;
 
-    public Service2(RestClient2 restClient) {
+    public ServiceCatFact(RestClient restClient) {
         this.restClient = restClient;
     }
 

@@ -13,5 +13,5 @@ import org.springframework.stereotype.Component;
 @Builder
 public class CatFact {
 
-    public String text;
+    private String text;
 }
