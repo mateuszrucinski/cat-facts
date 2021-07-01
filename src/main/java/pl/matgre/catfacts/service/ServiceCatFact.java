@@ -15,11 +15,11 @@ public class ServiceCatFact {
         this.restClient = restClient;
     }
 
-    public List<CatFact> getManyCatsFacts(String amount) {
-        return restClient.getManyApiCatsFacts(amount);
-    }
-
     public CatFact getCatFact() {
         return restClient.getApiCatsFact();
+    }
+
+    public List<CatFact> getManyCatsFacts(String amount) {
+        return restClient.getManyApiCatsFacts(amount);
     }
 }

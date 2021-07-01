@@ -17,13 +17,13 @@ public class Controller {
         this.serviceCatFact = serviceCatFact;
     }
 
-    @GetMapping("/catfacts/list")
-    public List<CatFact> getManyCatsFacts(@RequestParam String amount) {
-        return serviceCatFact.getManyCatsFacts(amount);
-    }
-
     @GetMapping("/catfact")
     public CatFact getCatsFact() {
         return serviceCatFact.getCatFact();
+    }
+
+    @GetMapping("/catfacts")
+    public List<CatFact> getManyCatsFacts(@RequestParam String amount) {
+        return serviceCatFact.getManyCatsFacts(amount);
     }
 }

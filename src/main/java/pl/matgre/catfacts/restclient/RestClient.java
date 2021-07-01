@@ -4,7 +4,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import pl.matgre.catfacts.catfactsDto.CatFactsDto;
+import pl.matgre.catfacts.catfactsDto.CatFactDto;
 import pl.matgre.catfacts.mapper.CatFactDtoToCatFactMapper;
 import pl.matgre.catfacts.model.CatFact;
 
@@ -18,31 +18,30 @@ public class RestClient {
     private RestTemplate restTemplate = new RestTemplate();
     private CatFactDtoToCatFactMapper catFactDtoToCatFactMapper = new CatFactDtoToCatFactMapper();
 
+    public CatFact getApiCatsFact() {
+
+        ResponseEntity<CatFactDto> exchange = restTemplate.exchange(
+                HTTPS_FACTS_RANDOM,
+                HttpMethod.GET,
+                null,
+                CatFactDto.class
+        );
+
+        return catFactDtoToCatFactMapper.mapCatFactDtoToCatFact(exchange.getBody());
+
+    }
+
     public List<CatFact> getManyApiCatsFacts(String amount) {
 
-        ResponseEntity<CatFactsDto[]> exchange = restTemplate.exchange(
+        ResponseEntity<CatFactDto[]> exchange = restTemplate.exchange(
                 HTTPS_FACTS_RANDOM + "?amount={amount}",
                 HttpMethod.GET,
                 null,
-                CatFactsDto[].class,
+                CatFactDto[].class,
                 amount
         );
 
         return catFactDtoToCatFactMapper.mapManyCatFactsDtoToCatFacts(exchange.getBody());
-
-    }
-
-
-    public CatFact getApiCatsFact() {
-
-        ResponseEntity<CatFactsDto> exchange = restTemplate.exchange(
-                HTTPS_FACTS_RANDOM,
-                HttpMethod.GET,
-                null,
-                CatFactsDto.class
-        );
-
-        return catFactDtoToCatFactMapper.mapCatFactDtoToCatFact(exchange.getBody());
 
     }
 
