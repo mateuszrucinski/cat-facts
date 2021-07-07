@@ -1,7 +1,7 @@
 package pl.matgre.catfacts.mapper;
 
 import org.springframework.stereotype.Component;
-import pl.matgre.catfacts.catfactsDto.CatFactDto;
+import pl.matgre.catfacts.catfactDto.CatFactDto;
 import pl.matgre.catfacts.model.CatFact;
 
 import java.util.ArrayList;

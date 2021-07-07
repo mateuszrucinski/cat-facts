@@ -1,4 +1,4 @@
-package pl.matgre.catfacts.catfactsDto;
+package pl.matgre.catfacts.catfactDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @Builder
-public class CatFactsDto {
+public class CatFactDto {
 
     private String text;
 }
